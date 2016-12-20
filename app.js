@@ -24,7 +24,7 @@ app.map = function(a, route){
 let site = {
     index : function(req, res){
         // res.send("site index");
-        res.sendFile(app.get("views") + "/index.html");
+        res.sendFile(app.get("views") + "/login.html");
     }
 }
 
