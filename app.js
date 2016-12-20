@@ -1,7 +1,13 @@
 let express = require("express");
+let bodyParser = require('body-parser');
+
+let user = require("./routes/user");
+
 let app = express();
 
 app.use(express.static("public"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("views", __dirname + "/views");
 app.set("public", __dirname + "/public");
@@ -50,19 +56,15 @@ let todolist = {
     }
 }
 
-let user = {
-    login : function(req, res){
-        res.send("user %s, %p login...", req.params.username, req.params.password);
-    },
-
-    signup : function(req, res){
-        res.send("user signup");
-    }
-}
-
 app.map({
     "/" : {
         get : site.index,
+        "login" : {
+            post : user.login
+        },
+        "signup" : {
+            post : user.signup
+        },
         "todolist" : {
             get : todolist.list,
             "/:tid" : {

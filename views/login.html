@@ -43,32 +43,32 @@
 
                 <div id="login">
                     <div class="row">
-                        <form class="col s12">
+                        <form class="col s12" action="./login" method="post">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">mail_outline</i>
-                                    <input id="email" type="email" class="validate">
+                                    <input name="email" id="email" type="email" class="validate">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">fingerprint</i>
-                                    <input id="password" type="password" class="validate">
+                                    <input name="password" id="password" type="password" class="validate">
                                     <label for="password">Password</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12" style="padding-left: 20px;">
-                                    <input type="checkbox" id="iscookie">
+                                    <input name="is_cookie" type="checkbox" id="iscookie">
                                     <label for="iscookie">Remember me</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12">
-                                    <a class="btn blue waves-effect waves-light right">
+                                    <button type="submit" class="btn blue waves-effect waves-light right">
                                         Login
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -81,28 +81,28 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">mail_outline</i>
-                                    <input id="email" type="email" class="validate">
+                                    <input name="email" id="email" type="email" class="validate">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">mood</i>
-                                    <input id="username" type="text" class="validate">
+                                    <input name="username" id="username" type="text" class="validate">
                                     <label for="username">Username</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">fingerprint</i>
-                                    <input id="password" type="password" class="validate">
+                                    <input name="password" id="password" type="password" class="validate">
                                     <label for="password">Password</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <i class="material-icons prefix">fingerprint</i>
-                                    <input type="password" id="repassword" class="validate">
+                                    <input name="re_password" type="password" id="repassword" class="validate">
                                     <label for="password">Re-Password</label>
                                 </div>
                             </div>
