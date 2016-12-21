@@ -5,6 +5,13 @@ let MongoClient = require("mongodb").MongoClient;
 let url = "mongodb://localhost:2333/todolist";
 
 let user = {
+    get : function(req, res){
+        res.send({
+            email : req.session.user.email,
+            username : req.session.user.username
+        });
+    },
+
     login : function(req, res){
         delete req.session.user;
 

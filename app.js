@@ -83,6 +83,9 @@ app.map({
         "index" : {
             get : site.index
         },
+        "user" : {
+            get : user.get
+        },
         "todolist" : {
             get : todolist.list,
             "/:tid" : {
