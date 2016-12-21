@@ -3,6 +3,7 @@ let bodyParser = require('body-parser');
 let session = require("express-session");
 
 let user = require("./routes/user");
+let todolist = require("./routes/todolist");
 
 let app = express();
 
@@ -48,27 +49,30 @@ let site = {
     }
 }
 
-let todolist = {
-    list : function(req, res){
-        res.send("todo list");
-    },
+// let todolist = {
+//     list : function(req, res){
+//         res.send("todo list");
+//     },
 
-    get : function(req, res){
-        res.send("get list " + req.params.tid);
-    },
+//     get : function(req, res){
+//         res.send("get list " + req.params.tid);
+//     },
 
-    post : function(req, res){
-        res.send("post list " + req.params.tid);
-    },
+//     post : function(req, res){
+//         // res.send("post list " + req.params.tid);
+//         console.log(req.body);
 
-    put : function(req, res){
-        res.send("put list " + req.params.tid);
-    },
+//         res.send("damn ok!!!");
+//     },
 
-    delete : function(req, res){
-        res.send("delete list " + req.params.tid);
-    }
-}
+//     put : function(req, res){
+//         res.send("put list " + req.params.tid);
+//     },
+
+//     delete : function(req, res){
+//         res.send("delete list " + req.params.tid);
+//     }
+// }
 
 app.map({
     "/" : {
@@ -88,9 +92,9 @@ app.map({
         },
         "todolist" : {
             get : todolist.list,
+            post : todolist.post,
             "/:tid" : {
                 get : todolist.get,
-                post : todolist.post,
                 put : todolist.put,
                 delete : todolist.delete
             }

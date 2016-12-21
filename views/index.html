@@ -132,7 +132,7 @@
 
                     <!-- Add new target -->
                     <div class="col s12 l8 m12 offset-l2 cus-m-b20 cus-m-t20">
-                        <a class="modal-trigger btn waves-effect waves-light light-blue" href="#add_modal">
+                        <a class="modal-trigger btn waves-effect waves-light light-blue" ng-click="switchAddTab()">
                             <i class="material-icons right">add</i>
                             Add
                         </a>
@@ -196,7 +196,7 @@
                 </div>
             </div>
 
-            <div id="add">
+            <div id="add" ng-controller="addTabCtrl">
                 <div class="row">
                     <div class="col s12 l8 m12 offset-l2 cus-m-b20">
                         <h5 class="cus-f-lightgrey cus-f-w300 cus-m-b20">Add Target</h5>
@@ -205,7 +205,7 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <!--<i class="material-icons prefix">mode_edit</i>-->
-                                        <textarea id="newtarget" class="materialize-textarea"></textarea>
+                                        <textarea id="newtarget" class="materialize-textarea" ng-model="list.title"></textarea>
                                         <label for="newtarget">What you want to do ?</label>
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
                                         <div class="switch">
                                             <label>
                                             Time limit
-                                            <input type="checkbox">
+                                            <input type="checkbox" ng-model="list.timelimit">
                                             <span class="lever"></span>
                                             </label>
                                         </div>
@@ -222,13 +222,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input type="date" class="datepicker" id="date">
+                                        <input type="date" class="datepicker" id="date" ng-model="list.date">
                                         <label for="date">Date</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col s12" style="padding-top: 10px; ">
-                                        <a class="right btn waves-effect waves-light blue">Agree</a>
+                                        <a class="right btn waves-effect waves-light blue" ng-click="addSubmit()">Agree</a>
                                     </div>
                                 </div>
                             </form>
@@ -239,7 +239,7 @@
         </div>
     </div>
 
-    <!-- modal space -->
+     <!--modal space 
     <div id="add_modal" class="modal">
         <div class="modal-content">
             <h4>New Target</h4>
@@ -257,7 +257,7 @@
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
         </div>
-    </div>
+    </div>-->
 
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -271,6 +271,7 @@
             });
 
             $('.datepicker').pickadate({
+                format: 'yyyy-mm-dd',
                 selectMonths: true, // Creates a dropdown to control month
                 selectYears: 15 // Creates a dropdown of 15 years to control year
             });
