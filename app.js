@@ -1,5 +1,6 @@
 let express = require("express");
 let bodyParser = require('body-parser');
+let session = require("express-session");
 
 let user = require("./routes/user");
 
@@ -8,6 +9,12 @@ let app = express();
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    name : "connect_sid",
+    resave : true,
+    saveUninitialized : true,
+    secret : "fuck_you_all"
+}));
 
 app.set("views", __dirname + "/views");
 app.set("public", __dirname + "/public");
@@ -29,7 +36,14 @@ app.map = function(a, route){
 
 let site = {
     index : function(req, res){
-        // res.send("site index");
+        if(req.session.user){
+            res.sendFile(app.get("views") + "/index.html");
+        }else{
+            res.redirect("./login");
+        }
+    },
+
+    login : function(req, res){
         res.sendFile(app.get("views") + "/login.html");
     }
 }
@@ -60,10 +74,14 @@ app.map({
     "/" : {
         get : site.index,
         "login" : {
+            get : site.login,
             post : user.login
         },
         "signup" : {
             post : user.signup
+        },
+        "index" : {
+            get : site.index
         },
         "todolist" : {
             get : todolist.list,

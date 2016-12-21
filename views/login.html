@@ -13,9 +13,9 @@
 
 </head>
 
-<body>
+<body ng-app="app" ng-controller="appCtrl">
     <div id="main-content" class="valign-wrapper row">
-        <div class="col s4 offset-s4">
+        <div class="col l4 offset-l4 m6 offset-m3 s10 offset-s1">
             <div class="z-depth-3">
                 <nav class="blue nav-extended cus-m-b20">
                     <div class="nav-wrapper">
@@ -43,30 +43,35 @@
 
                 <div id="login">
                     <div class="row">
-                        <form class="col s12" action="./login" method="post">
+                        <form class="col s12" ng-controller="loginFormCtrl">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">mail_outline</i>
-                                    <input name="email" id="email" type="email" class="validate">
+                                    <input name="email" id="email" type="email" class="validate" ng-model="user.email">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">fingerprint</i>
-                                    <input name="password" id="password" type="password" class="validate">
+                                    <input name="password" id="password" type="password" class="validate" ng-model="user.password">
                                     <label for="password">Password</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12" style="padding-left: 20px;">
-                                    <input name="is_cookie" type="checkbox" id="iscookie">
+                                    <input name="is_cookie" type="checkbox" id="iscookie" ng-model="user.is_cookie">
                                     <label for="iscookie">Remember me</label>
                                 </div>
                             </div>
                             <div class="row">
+                                <div ng-class="notify.color" class="col s12 center" ng-hide="notify == ''">
+                                    {{ notify.message }}
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col s12">
-                                    <button type="submit" class="btn blue waves-effect waves-light right">
+                                    <button class="btn blue waves-effect waves-light right" ng-click="loginFormSubmit()">
                                         Login
                                     </button>
                                 </div>
@@ -124,6 +129,7 @@
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/login/login.js"></script>
     <script>
         $(document).ready(function () {
             $("#main-content").css("margin-top", "100px");

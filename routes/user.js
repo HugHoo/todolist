@@ -6,15 +6,25 @@ let url = "mongodb://localhost:2333/todolist";
 
 let user = {
     login : function(req, res){
+        delete req.session.user;
+
         authenticate(req.body.email, req.body.password, function(err, user){
             if(err){
                 console.log('authenticated [%s : %s] failed: %s', req.body.email, req.body.password, err.message);
-                res.send(err.message);
+                res.send({
+                    ok : 0,
+                    message : err.message
+                });
             }else{
                 console.log("authentidated [%s : %s] successfully", req.body.email, req.body.password);
-                res.send("Login successfully.");
-            }
 
+                req.session.user = user;
+
+                res.send({
+                    ok : 1,
+                    message : "Login successfully."
+                });
+            }
         });
     },
 
@@ -33,24 +43,31 @@ let user = {
     }
 }
 
+// user authentication
 function authenticate(email, password, fn){
     console.log("authenticating [%s : %s]", email, password);
 
+    // connect to mongodb
     let conn = MongoClient.connect(url);
+
+    // conn intansed of Promise
     conn.then(function(db){
         let userColl = db.collection("users");
 
+        // find user from mongodb
         userColl.find({ email : email }).toArray(function(err, docs){
             assert.equal(err, null);
 
             // console.log("docs == null", docs == null);
             // console.log(docs.length);
 
+            // check if user existed
             if(!docs || docs.length != 1)
                 fn(new Error("Cannot find user."));
             else{
                 let user = docs[0];
 
+                // TODO secret password
                 if(password == user.password){
                     fn(null, user);
                 }else{
@@ -63,18 +80,23 @@ function authenticate(email, password, fn){
     });
 }
 
+// register user
 function register(user, fn){
     assert.equal(typeof user, "object");
 
     console.log('registering ', user);
 
+    // connect to mongodb
     let conn = MongoClient.connect(url);
+
+    // conn is instance of Promise
     conn.then(function(db){
         let userColl = db.collection("users");
 
         userColl.find({ email : user.email }).toArray(function(err, docs){
             assert.equal(err, null);
 
+            // check if email alreay existed
             if(docs.length == 0){
                 delete user['re_password'];
 
