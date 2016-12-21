@@ -34,10 +34,18 @@ let user = {
         register(req.body, function(err, user){
             if(err){
                 console.log('registered failed : ', err.message);                
-                res.send(err.message);
+                res.send({
+                    ok : 0,
+                    message : err.message
+                });
             }else{
                 console.log("registered successfully");
-                res.send("register successfully");
+
+                req.session.user = user;
+                res.send({
+                    ok : 1,
+                    message : "registered successfully"
+                });
             }
         });
     }

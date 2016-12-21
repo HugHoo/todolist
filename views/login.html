@@ -82,38 +82,43 @@
 
                 <div id="signup">
                     <div class="row">
-                        <form class="col s12" action="./signup", method="post">
+                        <form class="col s12" ng-controller="signupFormCtrl">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">mail_outline</i>
-                                    <input name="email" id="email" type="email" class="validate">
+                                    <input name="email" id="email" type="email" class="validate" ng-model="user.email">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">mood</i>
-                                    <input name="username" id="username" type="text" class="validate">
+                                    <input name="username" id="username" type="text" class="validate" ng-model="user.username">
                                     <label for="username">Username</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">fingerprint</i>
-                                    <input name="password" id="password" type="password" class="validate">
+                                    <input name="password" id="password" type="password" class="validate" ng-model="user.password">
                                     <label for="password">Password</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col s12 input-field">
                                     <i class="material-icons prefix">fingerprint</i>
-                                    <input name="re_password" type="password" id="repassword" class="validate">
+                                    <input name="re_password" type="password" id="repassword" class="validate" ng-model="user.re_password">
                                     <label for="password">Re-Password</label>
                                 </div>
                             </div>
                             <div class="row">
+                                <div ng-class="notify.color" class="col s12 center" ng-hide="notify == ''">
+                                    {{ notify.message }}
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col s12">
-                                    <button type="submit" class="btn blue waves-effect waves-light right">
+                                    <button class="btn blue waves-effect waves-light right" ng-click="signupFormCtrl()">
                                         Signup
                                     </button>
                                 </div>
